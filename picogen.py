@@ -248,7 +248,7 @@ def main():
         help="Facility code"
     )
     parser.add_argument(
-        "-f", "--format", type=str, 
+        "-f", "--format", type=str.lower, 
         choices=["h10301", "h10306", "c1k35s", "h10304", "c1k48s"],
         help="Data format type"
     )
@@ -295,7 +295,7 @@ c1k48s - HID 48bit Corporate 1000
     facility_code = args.facility_code
     count = args.count
     output_dir = args.output
-    format_type = args.format
+    format_type = args.format.lower()
 
     print("Creating files")
 
@@ -311,7 +311,7 @@ c1k48s - HID 48bit Corporate 1000
         block7 = encrypt_block7(hex_format)
 
         # Define the filename with facility code and the original card number in decimal format
-        file_name = f"FC{facility_code}CN{original_card_number}{format_type}.picopass"
+        file_name = f"cn{original_card_number}fc{facility_code}{format_type}.picopass"
         file_path = os.path.join(output_dir, file_name)
 
         # Flipper Picopass device file format
